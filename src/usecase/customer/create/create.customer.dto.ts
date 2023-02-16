@@ -17,5 +17,4 @@ export interface OutputCreateCustomerDto {
         zip: string;
         city: string;
     }
-
 }
