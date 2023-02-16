@@ -1,10 +1,9 @@
 import { Sequelize } from "sequelize-typescript";
+import Customer from "../../../domain/customer/entity/customer";
+import Address from "../../../domain/customer/value-object/address";
 import CustomerModel from "../../../infrastructure/customer/repository/sequelize/customer.model";
 import CustomerRepository from "../../../infrastructure/customer/repository/sequelize/customer.repository";
-import CreateCustomerUseCase from "../create/create.customer.usecase";
 import UpdateCustomerUseCase from "./update.customer.update";
-
-
 
 describe("Unit test update customer use case", () => {
 
@@ -29,18 +28,12 @@ describe("Unit test update customer use case", () => {
 
         const customerRepository = new CustomerRepository();
 
-        const updateUseCase = new UpdateCustomerUseCase(customerRepository);
-        const createUseCase = new CreateCustomerUseCase(customerRepository);
+        var customer = new Customer("123","John Doe");
+        customer.changeAddress(new  Address("Street 1",10,"00000-123","São Paulo"));
 
-        const customer = await createUseCase.execute({
-            name: "John Doe",
-            address: {
-                street: "Street 1",
-                city: "São Paulo",
-                number: 10,
-                zip: "00000-123"
-            }
-        });
+        customerRepository.create(customer)
+
+        const updateUseCase = new UpdateCustomerUseCase(customerRepository);
 
         const input = {
             id: customer.id,
