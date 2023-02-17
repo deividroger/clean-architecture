@@ -6,7 +6,7 @@ describe('Product unit tests', ()=> {
         
         expect(()=>{
             const product = new Product("","Product 1", 100);
-        }).toThrowError("Id is required")
+        }).toThrowError("product: Id is required")
 
     });
 
@@ -14,7 +14,7 @@ describe('Product unit tests', ()=> {
         
         expect(()=>{
             const product = new Product("12","", 100);
-        }).toThrowError("Name is required")
+        }).toThrowError("product: Name is required")
 
     });
 
@@ -22,9 +22,16 @@ describe('Product unit tests', ()=> {
         
         expect(()=>{
             const product = new Product("12","Product 1", -1);
-        }).toThrowError("Price must be greater than zero")
+        }).toThrowError("product: Price must be greater than zero")
 
     });
+
+    it("should throw error when Name and Id and are empty and price is invalid", ()=>{
+        expect(()=>{
+            const product = new Product("","", -1);
+        }).toThrowError("product: Id is required,product: Name is required,product: Price must be greater than zero")
+    });
+
 
     it('Should change name',()=>{
         const product = new Product("12","Product 1", 100);
