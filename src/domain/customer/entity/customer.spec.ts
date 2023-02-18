@@ -20,7 +20,7 @@ describe("Customer Unit tests",()=>{
     it("Should throw error when Name and Id are empty", ()=>{
         expect(()=> {
             new Customer('','');
-        }).toThrowError('customer: Name is required,customer: Id is required')
+        }).toThrowError('customer: Id is required,customer: Name is required')
 
     });
 
